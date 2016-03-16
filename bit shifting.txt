@@ -1,0 +1,16 @@
+#include <iostream>
+using namespace std;
+
+void main(){
+ 
+	char a, c;
+	int i = 7; //0000 0111
+
+	i <<= 2; //0001 1100  //7x2^2  //shift to left;
+
+	cout << i;
+	
+	i >>= 2; //shift to right;
+	
+ system("pause");
+}

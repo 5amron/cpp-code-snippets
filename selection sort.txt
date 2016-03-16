@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+
+int *selectionSort(int x[]);
+
+void main ()
+{
+	int y[21]={243,23,454,525,5,27,342,28,54,487,3,4,29,34,234,45,543,32,240,445,43};
+	int *z;
+	z = selectionSort(y);
+	cout<<z[0]<<endl;
+	system("PAUSE");
+}
+
+int *selectionSort(int x[])
+{
+	int min;
+	int item;
+	for(int i=0;i<20;i++){
+		min = i;
+		for(int j=i+1;j<21;j++){
+			if(x[j]<x[min]){
+				min=j;
+			}
+		}
+	item = x[i]; 
+	x[i] = x[min]; 
+	x[min] = item;
+	}
+	return x;
+}
+
+
+//1.	    for j=1 to n-1
+//2.	         smallest = j
+//3.         	 for i = j + 1 to n
+//4.	                  if A[ i ] < A[ smallest ]
+//5.                          smallest = i
+//6.         	  Exchange A[ j ] = A[ smallest ]

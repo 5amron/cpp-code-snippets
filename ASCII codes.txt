@@ -1,0 +1,12 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+	for (char ch = -128; ch < 127; ch++){
+		cout << "character=" << ch
+			<< "\tASCII Code=" << (int)ch << "\n";
+		cout << "character=" << ch << "\tASCII Code=" << (int)ch << endl;
+	}
+	system("pause");
+	return 0;
+}

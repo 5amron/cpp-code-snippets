@@ -1,0 +1,159 @@
+#include <iostream>
+#include <stdlib.h>
+
+using namespace std;
+
+class Node{
+        friend class Linkedlist;
+    private:
+        int info;
+        Node *next;
+};
+
+class Linkedlist{
+
+    public:
+        Linkedlist(int c){
+            first = last = NULL;
+        }
+        ~Linkedlist(){
+            Node *curptr = first;
+            Node *temp;
+            while(curptr)
+                {
+                    temp = curptr;
+                    delete temp;
+                    curptr = curptr->next;
+                }
+        }
+
+
+        void display(){
+            Node *h;
+            int i;
+
+            if(empty()){
+                cout<<"the list is empty!"<<endl;
+                return;
+            }
+            h = first;
+            do {
+                cout<<h->next;
+                h = h->next;
+            }while(h != NULL);
+
+
+
+        }
+        void enter(){
+            Node *help;
+            help = new Node;
+            help->next = NULL;
+
+            if(first == NULL){
+                first = last = help;
+            }
+                else{
+                    last->next = help;
+                    last = help;
+                }
+            cout<<"enter your number:"<<endl;
+            cin>>last->info;
+
+        }
+        void delNode(){
+            Node *h,*p;
+            int nNum;
+
+            if(empty()){
+                cout<<"the list is empty!"<<endl;
+                return;
+            }
+                else{
+                    cout<<"Enter number for deletion:"<<endl;
+                    cin>>nNum;
+                    h = p = first;
+                    while(h != NULL){
+                        if(h->info != nNum){
+                            p = h;
+                            h = h->next;
+                            continue;
+                        }
+                            else{//remove from start
+                                if(h == first){
+                                    first = h->next;
+                                    delete h;
+                                    delete p;
+                                    break;
+                                }
+                                else{
+                                    if(h == last){
+                                        last = p;
+                                        p->next = h->next;
+                                        delete h;
+                                        break;
+                                    }
+                                }
+
+                            }
+                    }
+                }
+        }
+        bool empty(){
+            return first == last == NULL;
+        }
+
+    private:
+        Node *first;
+        Node *last;
+};
+
+int main()
+{
+        int b=2;
+        Node *ptr,*start;
+        Linkedlist myList(b);
+        int k;
+        cout<<"your welcome Now you have a linked list!"<<endl;
+        cout<<"1.enter"<<endl;
+        cout<<"2.delNode"<<endl;
+        cout<<"3.display"<<endl;
+        cout<<"4.exit"<<endl;
+        cin>>k;
+
+        while(1){
+            switch(k){
+                case 1:
+                    myList.enter();
+                    break;
+                case 2:
+                    myList.delNode();
+                    break;
+                case 3:
+                    myList.display();
+                    break;
+                case 4:
+                    exit(0);
+            }
+        }
+
+
+
+        //PEYMAYESH
+        //ptr = first;
+        //while(ptr != NULL)
+        //{ process(ptr -> info);
+        //  ptr = ptr -> next;  }
+
+        cout<<"Hello"<<endl;
+
+
+
+return 0;
+}
+
+
+
+
+
+

@@ -1,0 +1,378 @@
+//author:samanSadeghyan
+//program purpose: creating a simple linked list with integer parameters.
+
+#include <iostream>
+using namespace std;
+
+class node{
+	friend class linkedList;
+private:
+	int data;
+	node *next;
+};
+
+class linkedList{
+	friend class node;
+public:
+	linkedList(){
+		first = last = NULL;
+	}
+	~linkedList(){
+		node *ptr = first;
+		node *help;
+		while (ptr){
+			help = ptr;
+			delete help;
+			ptr = ptr->next;
+		}
+	}
+	void enter(){
+		node *help;
+		help = new node;
+		help->next = NULL;
+		cout << "So now enter an integer to your list:" << endl;
+		cin >> help->data;
+		if (empty()){
+			first = last = help;
+		}
+		else{
+			last->next = help;
+			last = help;
+		}
+
+		cout << last->data << " is added to list." << endl;
+		return;
+	}
+	void delNode(){
+		node *ptr;
+		node *preptr;
+		int num;
+		if (empty()){
+			cout << "list is empty!" << endl;
+			return;
+		}
+		display();
+		cout << "\n";
+		cout << "What number do you want to remove?" << endl;
+		cin >> num;
+		ptr = preptr = first;
+		while (ptr != NULL){
+			if (ptr->data != num){
+				preptr = ptr;//mohem
+				ptr = ptr->next;
+				continue;
+			}
+			else{
+				if (ptr == first){
+					node *help;
+					help = ptr;
+					ptr = ptr->next;
+					first = ptr->next;
+					preptr = ptr->next;
+
+					delete help;
+					break;
+				}
+				else{
+					preptr->next = ptr->next;
+					delete ptr;
+				}
+			}
+		}
+		return;
+	}
+	void display(){
+		node *ptr;
+		if (empty()){
+			cout << "list is empty!" << endl;
+			return;
+		}
+		ptr = first;
+		while (ptr != NULL){
+			cout << ptr->data << "  ";
+			ptr = ptr->next;
+
+		}
+		cout << endl;
+		return;
+	}
+	bool empty(){
+		return first == NULL;
+	}
+//-------------------------------------------------------------------------------------------
+	void replacing(){
+		display();
+		int m,n;
+		node *ptr1;
+		node *ptr2;
+		ptr1 = ptr2 = first;
+		int a;
+		int b;
+
+		cout<<"Enter the first int you wanna..."<<endl;
+		cin>>m;
+		cout<<"Enter the second int you wanna..."<<endl;
+		cin>>n;
+
+
+		while(ptr1 != NULL){
+			if(ptr1->data == m){
+				a = m;
+				break;
+
+			}
+			ptr1 = ptr1->next;
+		}
+
+		while(ptr2 != NULL){
+			if(ptr2->data == n){
+				b = n;
+				break;
+			}
+			ptr2 = ptr2->next;
+		}
+
+		ptr1->data = b;
+		ptr2->data = a;
+		return;
+	}
+//-------------------------------------------------------------------------------------------------
+private:
+	node *first;
+	node *last;
+};
+
+int main()
+{
+
+	linkedList list;
+	int k;
+
+
+
+	while (1){
+
+		cout << "1.enter" << endl;
+		cout << "2.delNode" << endl;
+		cout << "3.display" << endl;
+		cout << "4.exit" << endl;
+		cout << "5.replacing two integer" << endl;
+		cin >> k;
+		switch (k){
+			case 1:
+				list.enter();
+				continue;
+			case 2:
+				list.delNode();
+				continue;
+			case 3:
+				list.display();
+				continue;
+			case 4:
+				break;
+			case 5:
+				list.replacing();
+				continue;
+
+		}
+
+
+		cout << "Hello" << endl;
+
+		return 0;
+	}
+}
+
+
+
+//author:samanSadeghyan
+//program purpose: creating a simple linked list with integer parameters.
+
+#include <iostream>
+using namespace std;
+
+class node{
+	friend class linkedList;
+private:
+	int data;
+	node *next;
+};
+
+class linkedList{
+	friend class node;
+public:
+	linkedList(){
+		first = last = NULL;
+	}
+	~linkedList(){
+		node *ptr = first;
+		node *help;
+		while (ptr){
+			help = ptr;
+			delete help;
+			ptr = ptr->next;
+		}
+	}
+	void enter(){
+		node *help;
+		help = new node;
+		help->next = NULL;
+		cout << "So now enter an integer to your list:" << endl;
+		cin >> help->data;
+		if (empty()){
+			first = last = help;
+		}
+		else{
+			last->next = help;
+			last = help;
+		}
+
+		cout << last->data << " is added to list." << endl;
+		return;
+	}
+	void delNode(){
+		node *ptr;
+		node *preptr;
+		int num;
+		if (empty()){
+			cout << "list is empty!" << endl;
+			return;
+		}
+		display();
+		cout << "\n";
+		cout << "What number do you want to remove?" << endl;
+		cin >> num;
+		ptr = preptr = first;
+		while (ptr != NULL){
+			if (ptr->data != num){
+				preptr = ptr;//mohem
+				ptr = ptr->next;
+				continue;
+			}
+			else{
+				if (ptr == first){
+					node *help;
+					help = ptr;
+					ptr = ptr->next;
+					first = ptr->next;
+					preptr = ptr->next;
+
+					delete help;
+					break;
+				}
+				else{
+					preptr->next = ptr->next;
+					delete ptr;
+				}
+			}
+		}
+		return;
+	}
+	void display(){
+		node *ptr;
+		if (empty()){
+			cout << "list is empty!" << endl;
+			return;
+		}
+		ptr = first;
+		while (ptr != NULL){
+			cout << ptr->data << "  ";
+			ptr = ptr->next;
+
+		}
+		cout << endl;
+		return;
+	}
+	bool empty(){
+		return first == NULL;
+	}
+//-------------------------------------------------------------------------------------------
+	void replacing(){
+		display();
+		int x,y;
+		node *m;
+		node *n;
+		node *p1;
+		node *p2;
+		node *a1;
+		node *a2;
+		m = n = a1 = a2 = p1 = p2 = first;
+
+		cout<<"Enter the first int you wanna..."<<endl;
+		cin>>x;
+		cout<<"Enter the second int you wanna..."<<endl;
+		cin>>y;
+
+		while(a1->next!=NULL){
+			p1 = m;
+			m = a1;
+			a1 = a1->next;
+			if(m->data==x){
+				break;
+			}
+		}
+		while(a2->next!=NULL){
+			p2 = n;
+			n = a2;
+			a2 = a2->next;
+			if(n->data==y){
+				break;
+			}
+		}
+
+		p1->next = n;
+		p2->next = m;
+		n->next = a1;
+		m->next = a2;
+
+		display();
+
+		return;
+	}
+//-------------------------------------------------------------------------------------------------
+private:
+	node *first;
+	node *last;
+};
+
+int main()
+{
+
+	linkedList list;
+	int k;
+
+
+
+	while (1){
+
+		cout << "1.enter" << endl;
+		cout << "2.delNode" << endl;
+		cout << "3.display" << endl;
+		cout << "4.exit" << endl;
+		cout << "5.replacing two integer" << endl;
+		cin >> k;
+		switch (k){
+			case 1:
+				list.enter();
+				continue;
+			case 2:
+				list.delNode();
+				continue;
+			case 3:
+				list.display();
+				continue;
+			case 4:
+				break;
+			case 5:
+				list.replacing();
+				continue;
+
+		}
+
+
+		cout << "Hello" << endl;
+
+		return 0;
+	}
+}
+

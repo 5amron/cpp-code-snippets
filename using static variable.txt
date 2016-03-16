@@ -1,0 +1,37 @@
+arian mozafaripor, [24.02.15 14:53]
+#include <iostream>
+using namespace std;
+
+int a;
+
+void AutoExample();
+void StaticExample();
+
+void main(){
+ 
+ AutoExample();
+ AutoExample();
+ AutoExample();
+
+ cout << endl;
+
+ StaticExample();
+ StaticExample();
+ StaticExample();
+
+ system("pause");
+}
+
+void AutoExample() {
+ int ae = 5;
+ cout << ae << endl;
+ ae += 3;
+ //cout << ae << endl;
+}
+
+void StaticExample() {
+ static int se = 5;
+ cout << se << endl;
+ se += 3;
+ //cout << se << endl;
+}

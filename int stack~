@@ -1,0 +1,103 @@
+#include <iostream>
+#include <cstdlib>
+#define maxSize 10
+using namespace std;
+
+class stack{
+public:
+	stack();
+	~stack();
+	void push(int x);
+	int pop();
+	void display();
+	bool full();
+	bool empty();
+private:
+	int *items;
+	int top;
+};
+
+stack::stack(){
+	items = new int[maxSize];
+	top = -1;
+}
+
+stack::~stack(){
+	delete items;
+}
+
+void stack::push(int x){
+	if(full()){
+		cout<<"Stack is full!"<<endl;
+		return;
+	}
+	items[++top] = x;
+}
+
+int stack::pop(){
+	if(empty()){
+		cout<<"Stack is empty!"<<endl;
+		exit(1);
+	}
+	int x;
+	x = items[top];
+	top--;
+	return x;
+}
+
+void stack::display(){
+	if(empty()){
+		cout<<"Stack is empty!"<<endl;
+		return;
+	}
+	for(int i=1;i<=top;i++){
+		cout<<items[i]<<" ";
+	}
+	cout<<endl;
+	return;
+}
+
+bool stack::empty(){
+	return top==-1;
+}
+
+bool stack::full(){
+	return top==maxSize;
+}
+
+int main(){
+	stack myStack;
+	int a;
+	int b;
+	cout<<"Now you have a stack!"<<endl;
+while(1){
+	cout<<"1.display:"<<endl;
+	cout<<"2.push:"<<endl;
+	cout<<"3.pop:"<<endl;
+	cout<<"4.exit:"<<endl;
+	cin>>a;
+	switch(a){
+	case 1:
+		myStack.display();
+		continue;
+	case 2:
+		cout<<"What number do you want to add: ";
+		cin>>b;
+		myStack.push(b);
+		continue;
+	case 3:
+		cout<<myStack.pop()<<" has been poped!"<<endl;
+		continue;
+	case 4:
+		exit(1);
+
+	default:
+		cout<<"error"<<endl;
+		continue;
+	}
+}
+
+
+	return 0;
+}
+

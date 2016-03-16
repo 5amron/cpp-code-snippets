@@ -1,0 +1,12 @@
+void subAdd(int** a, int** b, int** sub, int** add,int n) 
+{ 
+		int i, j; 
+
+
+		for(i = 0; i < n; i ++) 
+			for(j = 0; j < n; j ++) { 
+
+				sub[i][j] = a[i][j] - b[i][j]; 
+				add[i][j] = a[i][j] + b[i][j]; 
+	} 
+}

@@ -1,0 +1,22 @@
+void sTranspose(int b[5][3], int bt[5][3])
+{
+	int i, j, k;
+	int t = b[0][2];
+	bt[0][2] = t;
+
+	int m = b[0][1];
+	bt[0][1] = b[0][0];
+	bt[0][0] = m;
+
+	k = 1;
+
+	for(i = 0; i < m; i ++)
+	for(j = 1; j <= t; j ++)
+
+	if(i ==b[j][1]){
+	bt[k][0] = b[j][1];
+	bt[k][1] = b[j][0];
+	bt[k][2] = b[j][2];
+	k ++;
+	}
+}

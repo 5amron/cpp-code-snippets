@@ -1,0 +1,37 @@
+//author:samanSadeghyan
+//program purpose: BMI calculator
+
+#include <iostream>
+
+using namespace std;
+
+int main ()
+{
+	cout<<"Please enter your weight in kilogram unit:"<<endl;
+
+	double w;
+	cin>>w;
+
+	cout<<"Now enter your height in meter unit:"<<endl;
+
+	double h;
+	cin>>h;
+
+	double bmi;
+
+	bmi = (w)/(h*h);
+	cout<<"your bmi is: "<<bmi<<endl;
+
+	if(bmi<=18.5){
+		cout<<"status: Underweight!"<<endl;
+	}else if(18.5<bmi && bmi<=25){
+		cout<<"status: Normal!"<<endl;
+	}else if(25<bmi && bmi<=30){
+		cout<<"status: Overweight!"<<endl;
+	}else if(30<bmi){
+		cout<<"status: Obese!"<<endl;
+	}else cerr<<"error"<<endl;
+
+	return 0;
+}
+

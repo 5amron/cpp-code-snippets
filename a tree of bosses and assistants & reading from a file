@@ -1,0 +1,99 @@
+//Author : samanSadeghyan
+//project(1)
+//tip: we use a file 'afile.dat' in this program.
+//baraye estefade az file digari faghat kafist khate 53 (j<=9) ra taghir dahim.
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int max;
+
+class node{
+public:
+	int data;
+	node *right;
+	node *left;
+};
+
+	void preorder(node *s,int *ptrMax){
+		if(s){
+			if(*ptrMax < s->data){
+				*ptrMax = s->data;
+			}
+			preorder(s->left,ptrMax);
+			preorder(s->right,ptrMax);
+		}
+	}
+
+int main ()
+{
+	ifstream inFile;
+	inFile.open("afile.dat");
+
+	int n;
+	int pi;
+	int boss;
+	int assistant;
+	int max;
+	int *ptrMax = &max;
+
+	inFile>>n;
+	node *ptr[n];
+	for(int i=1;i<=n;i++){
+		ptr[i] = new node;
+		ptr[i]->left = NULL;
+		ptr[i]->right = NULL;
+		inFile>>pi;
+		ptr[i]->data = pi;
+	}
+
+	for(int j=1;j<=9;j++){
+		inFile>>boss;
+		inFile>>assistant;
+		if(ptr[boss]->left==NULL){
+			ptr[boss]->left = ptr[assistant];
+		}else {
+			ptr[boss]->right = ptr[assistant];
+		}
+	}
+
+	/*for(int k=1;k<=10;k++){
+		if(NULL!=ptr[k]->left){
+			cout<<k<<" "<<ptr[k]->left->data<<" ";
+		}
+		if(NULL!=ptr[k]->right){
+			cout<<ptr[k]->right->data;
+		}
+		cout<<endl;
+	}*/
+
+	for(int k=1;k<=n;k++){
+		*ptrMax = 0;
+		preorder(ptr[k],ptrMax);
+		cout<<*ptrMax<<endl;
+	}
+
+	inFile.close();
+
+	cout<<"Hello!!!"<<endl;
+	return 0;
+}
+
+/*------------------afile.dat-----------------------------------
+
+10						//
+929 611 649 491 612 120 126 43 769 402		//
+1 2						//
+1 3						//
+3 7						//
+3 8						//
+8 9                                             //----  it makes a binary tree!
+8 10						//
+2 4						//
+4 5						//
+4 6						//
+						//
+*/
+
+

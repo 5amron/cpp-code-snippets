@@ -1,0 +1,31 @@
+int **initializingMatrix(int,int);
+
+void main ()
+{
+	
+	
+	int **z=initializingMatrix(10,10);
+	
+	for(int i=0;i<10;i++){
+		for(int j=0;j<10;j++){
+			cout<<z[i][j]<<"  ";
+		}
+		cout<<endl;
+	}
+
+	// delete [] z;
+	// actually learn this heap and allocation memory;	
+	system("pause");
+}
+
+
+int **initializingMatrix(int rows,int columns)
+{
+	int **table=new int*[rows];
+	for(int i = 0; i < rows; i++) {
+        table[i] = new int[columns]; 
+        for(int j = 0; j < columns; j++){ table[i][j] = (i+j); }// sample set value;    
+    }
+	
+    return table;
+}

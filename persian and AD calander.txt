@@ -1,0 +1,332 @@
+#include<iostream>
+#include<stdio.h>
+#include<cmath>
+#include<iomanip>
+using namespace std;
+int MiladiIsLeap(int miladiYear)
+{
+	if (((miladiYear % 100) != 0 && (miladiYear % 4) == 0) || ((miladiYear % 100) == 0 && (miladiYear % 400) == 0))
+		return 1;
+	else
+		return 0;
+}
+
+int DoomsDay(int year)
+{
+	int a = 0;
+	if (year >= 1800 && year <= 1899) a = 5;
+	else if (year >= 1900 && year <= 1999) a = 3;
+	else if (year >= 2000 && year <= 2099) a = 2;
+	else if (year >= 2100 && year <= 2199) a = 0;
+	else return -1;
+	int  y = year % 100;
+	int z = (y + floor(y / 4) + a);
+	z = z % 7;
+	return (z);
+}
+
+int GetDayOfWeek(int y, int m, int d)
+{
+	int doom;
+	doom = DoomsDay(y);
+	int AllDoomsy[13] = { -1, 3, 7, 7, 4, 2, 6, 4, 1, 5, 3, 7, 5 };
+	int c = AllDoomsy[m];
+	if ((m == 1 || m == 2) && MiladiIsLeap(y) == 1) c++;
+	int r = d - c + doom;
+	if (r<0) r = r + 7;
+	return (r % 7);
+}
+
+typedef struct _SHAMSIDATE
+{
+	int iYear;
+	int iMonth;
+	int iDay;
+}SDATE;
+
+SDATE MiladiToShamsi(int iMiladiMonth, int iMiladiDay, int iMiladiYear)
+{
+
+	int  shamsiDay, shamsiMonth, shamsiYear;
+	int  dayCount, farvardinDayDiff, deyDayDiff;
+	int  sumDayMiladiMonth[] = { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334 };
+	int  sumDayMiladiMonthLeap[] = { 0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335 };
+	SDATE  shamsidate;
+
+	farvardinDayDiff = 79;
+
+	if (MiladiIsLeap(iMiladiYear))
+	{
+		dayCount = sumDayMiladiMonthLeap[iMiladiMonth - 1] + iMiladiDay;
+	}
+	else
+	{
+		dayCount = sumDayMiladiMonth[iMiladiMonth - 1] + iMiladiDay;
+	}
+	if ((MiladiIsLeap(iMiladiYear - 1)))
+	{
+		deyDayDiff = 11;
+	}
+	else
+	{
+		deyDayDiff = 10;
+	}
+	if (dayCount > farvardinDayDiff)
+	{
+		dayCount = dayCount - farvardinDayDiff;
+		if (dayCount <= 186)
+		{
+			switch (dayCount % 31)
+			{
+			case 0:
+				shamsiMonth = dayCount / 31;
+				shamsiDay = 31;
+				break;
+			default:
+				shamsiMonth = (dayCount / 31) + 1;
+				shamsiDay = (dayCount % 31);
+				break;
+			}
+			shamsiYear = iMiladiYear - 621;
+		}
+		else
+		{
+			dayCount = dayCount - 186;
+			switch (dayCount % 30)
+			{
+			case 0:
+				shamsiMonth = (dayCount / 30) + 6;
+				shamsiDay = 30;
+				break;
+			default:
+				shamsiMonth = (dayCount / 30) + 7;
+				shamsiDay = (dayCount % 30);
+				break;
+			}
+			shamsiYear = iMiladiYear - 621;
+		}
+	}
+	else
+	{
+		dayCount = dayCount + deyDayDiff;
+
+		switch (dayCount % 30)
+		{
+		case 0:
+			shamsiMonth = (dayCount / 30) + 9;
+			shamsiDay = 30;
+			break;
+		default:
+			shamsiMonth = (dayCount / 30) + 10;
+			shamsiDay = (dayCount % 30);
+			break;
+		}
+		shamsiYear = iMiladiYear - 622;
+
+	}
+	shamsidate.iYear = shamsiYear;
+	shamsidate.iMonth = shamsiMonth;
+	shamsidate.iDay = shamsiDay;
+
+	return shamsidate;
+}
+
+SDATE ShamsiToMiladi(int y, int m, int d)
+{
+	int sumshamsi[] = { 31, 62, 93, 124, 155, 186, 216, 246, 276, 306, 336, 365 };
+	int miladidays[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	int yy, mm, dd, daycount;
+	daycount = d;
+	if (m > 1) daycount = daycount + sumshamsi[m - 2];
+	yy = y + 621;
+	daycount = daycount + 79;
+	if (MiladiIsLeap(yy))
+	{
+		if (daycount > 366)
+		{
+			daycount -= 366;
+			yy++;
+		}
+
+	}
+	else if (daycount > 365)
+	{
+		daycount -= 365;
+		yy++;
+	}
+	if (MiladiIsLeap(yy)) miladidays[1] = 29;
+	mm = 0;
+	while (daycount > miladidays[mm])
+	{
+		daycount = daycount - miladidays[mm];
+		mm++;
+	}
+	SDATE miladiDate;
+	miladiDate.iYear = yy;
+	miladiDate.iMonth = (mm + 1);
+	miladiDate.iDay = daycount;
+	return miladiDate;
+}
+
+void PrintCalander(int year, int month, int sm, int start, int end, int w)
+{
+	char* ShamsiMonths[] = { "Farvardin", "Ordibehesht", "Khordad", "Tir", "Mordad", "Shahrivar", "Mehr", "Aban", "Azar", "Dey", "Bahman", "Esfand" };
+	char* MiladiMonths[] = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+	char* ShamsiWeekDays[] = { "Sh", "1Sh", "2Sh", "3Sh", "4Sh", "5Sh", "Jom" };
+	char* MiladiWeekDays[] = { "Su", "Mo", "Tu", "We", "Th", "Fr", "Sa" };
+	cout << endl;
+	int i = 0;
+	if (sm == 0)
+	{
+		cout << ShamsiMonths[month - 1] << "  " << year << endl;
+		for (i = 0; i<7; i++) cout << setw(10) << ShamsiWeekDays[i];
+		w++;
+		w = w % 7;
+	}
+	else
+	{
+		cout << MiladiMonths[month - 1] << "  " << year << endl;;
+		for (i = 0; i<7; i++) cout << setw(10) << MiladiWeekDays[i];
+
+	}
+	cout << endl;
+	int k = w;
+	for (i = 0; i<k; i++)
+	{
+		cout << setw(10) << " ";
+		if (w == 7){ cout << endl; w = 0; }
+	}
+	for (i = start; i <= end; i++)
+	{
+		cout << setw(10) << i;
+		w++;
+		if (w == 7){ cout << endl; w = 0; }
+	}
+	cout << endl;
+}
+
+void ShowMenu()
+{
+	cout << "Please Select:" << endl << "1.Persian Calander" << endl << "2.Miladi Calander" << endl;
+}
+
+void main()
+{
+	
+	int a;
+	int sm;//0 for shamsi,1 for miladi
+	int MiladiMonths[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	int ShamsiMonths[] = { 31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29 };
+	SDATE date;
+	int week;
+	ShowMenu();
+	char ch;
+	cin >> ch;
+	while (ch != '1' && ch != '2')
+	{
+		cout << "Please Enter 1 or 2: " << endl;
+		cin >> ch;
+	}
+	if (ch == '1') sm = 0;//shamsi calander
+	else sm = 1; //miladi calander
+	cout << endl << "Please Select:" << endl << "1.Weekly Calander" << endl << "2.Monthly Calander" << endl;
+	cin >> ch;
+	while (ch != '1' && ch != '2')
+	{
+		cout << "Please Enter 1 or 2: " << endl;
+		cin >> ch;
+	}
+	cout << endl << "Enter the year Like this yyyy: ";
+	cin >> date.iYear;
+
+	if (ch == '1')
+	{
+		cout << "Enter the week Number: ";
+		cin >> week;
+		while (week>52)
+		{
+			cout << "week must be less than 53" << endl;
+			cin >> week;
+		}
+		date.iDay = ((week - 1) * 7) + 1;
+		date.iMonth = 0;
+		if (sm == 0)
+		{
+			while (date.iDay>ShamsiMonths[date.iMonth])
+			{
+				date.iDay -= ShamsiMonths[date.iMonth];
+				date.iMonth++;
+			}
+		}
+		else
+		{
+			while (date.iDay>MiladiMonths[date.iMonth])
+			{
+				date.iDay -= MiladiMonths[date.iMonth];
+				date.iMonth++;
+			}
+		}
+		date.iMonth++;
+		SDATE tmp;
+		tmp.iYear = date.iYear;
+		tmp.iMonth = date.iMonth;
+		tmp.iDay = date.iDay;
+		if (sm == 0) tmp = ShamsiToMiladi(date.iYear, date.iMonth, date.iDay);
+
+		int z = GetDayOfWeek(tmp.iYear, tmp.iMonth, tmp.iDay);
+		int start, end;
+		start = date.iDay;
+		end = date.iDay + 6;
+		if (sm == 0)
+		{
+			if (end>ShamsiMonths[date.iMonth])
+			{
+				end = ShamsiMonths[date.iMonth - 1];
+				cout << "WARNINIG: Some of days Cannot be shown in this Month" << endl;
+			}
+		}
+		else
+		{
+			if (end>MiladiMonths[date.iMonth])
+			{
+				end = MiladiMonths[date.iMonth - 1];
+				cout << "WARNINIG: Some of days Cannot be shown in this Month" << endl;
+			}
+		}
+		cout << endl << endl;
+		PrintCalander(date.iYear, date.iMonth, sm, start, end, z);
+	}
+	else
+	{
+		cout << "Enter the Month Number: ";
+		cin >> date.iMonth;
+		while (date.iMonth>12)
+		{
+			cout << "Month must be less than 12" << endl;
+			cin >> date.iMonth;
+		}
+		date.iDay = 1;
+		SDATE tmp;
+		tmp.iYear = date.iYear;
+		tmp.iMonth = date.iMonth;
+		tmp.iDay = date.iDay;
+		if (sm == 0) tmp = ShamsiToMiladi(date.iYear, date.iMonth, date.iDay);
+
+		int z = GetDayOfWeek(tmp.iYear, tmp.iMonth, tmp.iDay);
+		int start, end;
+		start = 1;
+		if (sm == 0)
+		{
+			if (date.iMonth <= 6) end = 31;
+			else if (date.iMonth != 12) end = 30;
+			else if (date.iYear % 4 == 3) end = 30;
+			else end = 29;
+		}
+		else end = MiladiMonths[date.iMonth - 1];
+		cout << endl << endl;
+		PrintCalander(date.iYear, date.iMonth, sm, start, end, z);
+	}
+	
+}
+//end
+

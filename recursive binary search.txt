@@ -1,0 +1,29 @@
+int Bin_search(int * A, int item, int n) {
+
+      int mid;
+	  int first;
+	  int last;
+
+	if(last!=mid-1||first!=mid+1){
+	  int first = 0;
+	  int last = n-1;
+	}
+
+      mid = ((last - first) / 2);
+
+      if (A[mid]> item){
+		  last=mid-1;
+		  
+		    return Bin_search(A,item, n);
+	  }
+		else if (A[mid] <item){
+		  first=mid+1;
+			return Bin_search(A,item, n);
+		}
+			else
+				if(mid==item){
+					return mid;
+				}
+				else
+					return -1;
+  }

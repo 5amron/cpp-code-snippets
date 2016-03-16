@@ -1,0 +1,81 @@
+// programmer : samanSadeghyan
+// finding Jumping Numbers using bfs in graph
+#include<iostream>
+#include<queue>
+#include <algorithm>
+using namespace std;
+
+class myClass{
+public:
+void bfs(int x, int theNumber)
+{
+	queue <int> myQueue;
+	myQueue.push(theNumber);
+	
+	while (!myQueue.empty())
+	{
+		theNumber = myQueue.front();
+		myQueue.pop();
+
+		if (theNumber <= x)
+		{
+			
+			//m++;
+			arr[m]=theNumber;
+			m++;
+			//cout << theNumber << " ";
+
+			//sort(arr,arr+(m));
+			//cout << m << "   ";
+			//if ((m+2)==x){
+			//	cout << 0 << " ";
+			//	for (int f = 0;f<m+1;f++){
+			//		cout << arr[f] << " ";
+			//	}
+
+			int myLast = theNumber % 10;
+
+			if (myLast==0){
+				myQueue.push((theNumber*10)+(myLast+1));
+			}
+			else if (myLast == 9){
+				myQueue.push((theNumber*10)+(myLast-1));
+			}
+			else{myQueue.push((theNumber*10)+(myLast-1));
+				myQueue.push((theNumber*10)+(myLast+1));
+			}
+		}
+	}
+}
+
+void sAndP(){
+
+	sort(arr,arr+m);
+
+	cout << 0 << " ";
+		for (int f = 0;f<m;f++){
+			cout << arr[f] << " ";
+		}
+}
+
+
+private:
+	int m = 0;
+	int arr[10000];
+};
+
+
+int main()
+{	
+	myClass myObject;
+	cout << "enter your theNumberber :"<<endl;
+	int x;
+	cin >> x;
+	for (int i = 1; i <= 9 && i <= x; i++){
+		myObject.bfs(x, i);
+	}
+
+	myObject.sAndP();
+	system("pause");
+	return 0;
+}

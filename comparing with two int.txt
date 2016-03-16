@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+void main ()
+{
+	int a=3;
+	int b=4;
+	int res=max(a,b);
+	cout<<res<<endl;
+	system("PAUSE");
+}
+
+
+int max(int A,int B)
+{
+	int res;
+	if(A<B){
+		res=B;
+	}else{
+		res=A;
+	}
+	
+	return res;
+}

@@ -1,0 +1,196 @@
+//author:samanSadeghyan
+//program purpose: rolling two dices and calculating the sum of them and proving that number 7 has the most possibility.
+
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+
+
+int main()
+{
+	srand( (unsigned)time( NULL ) );
+
+
+	int b;
+
+//for(int h=1;h<5;h++){
+
+	while(1){
+		int a = rand();
+		b = a % 10;
+		if(b>=1 && b<=6){
+			break;
+		}
+	}
+	int i = b;
+	cout<<"value of first dice:"<<i<<endl;
+
+	int l;
+	while(1){
+		int a = rand();
+		l = a % 10;
+		if(l>=1 && l<=6){
+			break;
+		}
+	}
+	int j;
+	j = l;
+	cout<<"value of second dice:"<<j<<endl;
+
+
+//}
+
+	cout<<"****************************************************************************"<<endl;
+
+
+	int c2;
+	int c3;
+	int c4;
+	int c5;
+	int c6;
+	int c7;
+	int c8;
+	int c9;
+	int c10;
+	int c11;
+	int c12;
+
+for(int k=1;k<10000;k++){
+	while(1){
+			int a = rand();
+			b = a % 10;
+			if(b>=1 && b<=6){
+				break;
+			}
+		}
+		int i = b;
+
+	while(1){
+				int a = rand();
+				int b = a % 10;
+				if(b>=1 && b<=6){
+					break;
+				}
+			}
+		int j = b;
+
+		int s;
+		s = i + j;
+
+
+		switch(s){
+			case 2:
+				c2++;
+				continue;
+			case 3:
+				c3++;
+				continue;
+			case 4:
+				c4++;
+				continue;
+			case 5:
+				c5++;
+				continue;
+			case 6:
+				c6++;
+				continue;
+			case 7:
+				c7++;
+				continue;
+			case 8:
+				c8++;
+				continue;
+			case 9:
+				c9++;
+				continue;
+			case 10:
+				c10++;
+				continue;
+			case 11:
+
+				c11++;
+				continue;
+			case 12:
+				c12++;
+				continue;
+			default:
+				cout<<"error"<<endl;
+				break;
+		}
+
+
+
+}
+
+	int y[11];
+	y[0] = c2;
+	y[1] = c3;
+	y[2] = c4;
+	y[3] = c5;
+	y[4] = c6;
+	y[5] = c7;
+	y[6] = c8;
+	y[7] = c9;
+	y[8] = c10;
+	y[9] = c11;
+	y[10] = c12;
+
+	//sorting y[];
+
+		int min;
+		int item;
+		for(int i=0;i<10;i++){
+			min = i;
+			for(int j=i+1;j<11;j++){
+				if(y[j]<y[min]){
+					min=j;
+				}
+			}
+			item = y[i];
+			y[i] = y[min];
+		y[min] = item;
+		}
+
+		 if(y[10]==c2){
+			 cout<<"the most sum that earned is: 2"<<endl;
+		 }
+		 if(y[10]==c3){
+			 cout<<"the most sum that earned is: 3"<<endl;
+		  }
+		 if(y[10]==c4){
+			 cout<<"the most sum that earned is: 4"<<endl;
+		  }
+		 if(y[10]==c5){
+			 cout<<"the most sum that earned is: 5"<<endl;
+		 }
+		 if(y[10]==c6){
+			 cout<<"the most sum that earned is: 6"<<endl;
+		  }
+		 if(y[10]==c7){
+			 cout<<"the most sum that earned is: 7"<<endl;
+		  }
+		 if(y[10]==c8){
+			 cout<<"the most sum that earned is: 8"<<endl;
+		 }
+		 if(y[10]==c9){
+			 cout<<"the most sum that earned is: 9"<<endl;
+		  }
+		 if(y[10]==c10){
+			 cout<<"the most sum that earned is: 10"<<endl;
+		  }
+		 if(y[10]==c11){
+			 cout<<"the most sum that earned is: 11"<<endl;
+		 }
+		 if(y[10]==c12){
+			 cout<<"the most sum that earned is: 12"<<endl;
+		 }
+
+
+
+
+
+
+return 0;
+}
+

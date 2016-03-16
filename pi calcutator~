@@ -1,0 +1,88 @@
+//author:samanSadeghyan
+//program purpose: pi calculator with an infinte series.
+
+
+#include <iostream>
+#include <iomanip>
+#include <string>                                  // **  add
+
+using namespace std;
+
+int input(string x);
+
+
+
+int main()
+{
+
+int pie, denom = 3, terms, steps, counter;            // add counter
+
+float newPi = 4.0;
+
+bool condition = true;
+
+string prompt;
+
+terms = input( "How many terms? " );
+steps = input( "Display Pi after how many steps? " );
+
+cout << "Results:";
+cout << endl << endl;
+
+counter = 0;                                            // set counter to 0
+for ( int i = 1; i <=terms; i++ )                      // ** i <= terms
+{
+if (condition)
+{
+
+newPi -= ( 4.0 / denom );
+
+condition = false;
+
+denom += 2;
+
+}
+
+else
+{
+
+newPi += ( 4.0 / denom );
+
+condition = true;
+
+denom += 2;
+}
+
+cout << setiosflags(ios::fixed) << setiosflags(ios::showpoint) << setprecision(100);
+
+counter++;                                  // here we increment the counter and
+if (counter == steps) {                     // see if it's time for a display step
+  cout << newPi << endl;
+  counter=0;
+}
+}
+
+
+
+cout << endl << endl;
+
+return 0;
+}
+
+
+
+int input(string x)
+{
+int y;
+do {
+cout << x;
+cin >> y;
+if (y<=0) cout << "Error -- invalid input" << endl << endl;
+
+} while ( y <= 0 );
+
+  return y;
+}
+
+
+

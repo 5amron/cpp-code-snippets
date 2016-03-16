@@ -1,0 +1,18 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int main ()
+{
+   
+
+    char g[6] = {'h','e','l','l','o','\0'};
+    char h[6];
+
+    strcpy(h,g);
+
+    cout<<h<<g<<endl;
+
+    return 0;
+}
+

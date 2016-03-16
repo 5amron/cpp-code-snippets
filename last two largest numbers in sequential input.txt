@@ -1,0 +1,40 @@
+//samanSadeghyan
+//PN:last two largest number in sequential input;
+//form 1;
+
+#include <iostream>
+
+ 
+using namespace std;
+ 
+int main()
+{
+  
+  int counter = 1;
+  int largest1 = 0;
+  int largest2 = 0;
+  int number;
+ 
+  
+  while( counter <= 10)
+  {
+	  cout<< "please enter an integer:\n ";
+	  cin>> number;
+	   counter++;
+	  if ((largest1 <= number) && (largest2 < number))
+	 {
+	 largest1=number;
+	  }
+	  else if ((largest1 > number) && (largest2 <= number))
+	  {
+	 largest2=number;
+	 
+	  }
+  }
+  cout<<"the largest number among these numbers is: \n"<<largest1<<endl;
+	 cout<<"and second largest number is: \n"<<largest2<<endl;
+	
+
+   system("PAUSE");
+   return 0;
+}

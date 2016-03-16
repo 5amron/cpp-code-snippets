@@ -1,0 +1,27 @@
+for (c = 0; c<m; c++)
+if (y[c] != y[c - 1])
+{
+	ch = 0;
+	for (i = 0; i<n; i++)
+	if (y[c] == x[i])
+	{
+		ch = 1;
+		break;
+	}
+	if (ch != 1)
+		cout << y[c] << "\t";
+}
+cout << endl;
+//------------------------------------------------------------
+cout << "Subscription: ";
+c = 0;
+for (i = 0; i<n; i++)
+if (x[i] != x[i - 1])
+for (; y[c] <= x[i] && c<m; c++)
+if (y[c] != y[c - 1] && x[i] == y[c])
+{
+	cout << x[i] << "\t";
+	break;
+}
+}
+

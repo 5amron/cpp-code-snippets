@@ -1,0 +1,32 @@
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <string>
+
+using namespace std;
+
+int main() {
+	string item;
+	ofstream OutFile;
+ OutFile.open("Data.txt");
+
+ OutFile << "Hello";
+
+ OutFile.close();
+
+ ifstream InFile;
+ InFile.open("Data.txt");
+
+ if (InFile.fail()) {
+ cerr << "Error!";
+ exit(1);
+ }
+ InFile>> item;
+ cout << item << endl;
+
+ InFile.close();
+
+
+ return 0;
+}
+

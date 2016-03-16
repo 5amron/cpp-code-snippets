@@ -1,0 +1,12 @@
+#include <iostream>
+using namespace std;
+
+void main(){
+ int a = 074;
+ int b = 0xAB42;
+
+ cout<<a<<endl;
+ cout<<b<<endl;
+
+ system("pause");
+}

@@ -1,0 +1,9 @@
+void multiply(int** m1, int** m2, int** m3 , int P, int Q, int R) 
+{ 
+	for(int i = 0 ; i < P ; i++) 
+	 for(int j = 0 ; j < R ; j++){ 
+		m3[i][j]=0; 
+		for(int k = 0 ;k < Q ; k ++) 
+		 m3[i][j] = m3[i][j] + m1[i][k] * m2[k][j]; 
+	} 
+}
