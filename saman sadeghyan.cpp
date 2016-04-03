@@ -1,6 +1,5 @@
 //samanSadeghyan;
 //project hospital management system;
-//professor rezayi;
 
 
 #include<iostream>
@@ -187,7 +186,7 @@ cout << "Social security number: " << p->ID;
 int ReadNumber()
 {
 // this function reads an integer number from the keyboard.
-// it is used because input with cin >> doesn’t work properly!
+// it is used because input with cin >> doesnâ€™t work properly!
 char buffer[20];
 cin.getline(buffer, sizeof(buffer));
 return atoi(buffer);
