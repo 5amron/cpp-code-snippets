@@ -1,4 +1,4 @@
-# simple_cpp_programs
+# javascript-code-snippets
 simple c++ programs which some of them can be used in major projects.
 
 samanSadeghyan
