@@ -2,4 +2,4 @@
 simple c++ programs which some of them can be used in major projects.
 
 samanSadeghyan
-samronsadeghyan@gmail.com
+s.sadeghy325@gmail.com
